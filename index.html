@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="nl" data-bs-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Multilevel Accordion met Cerulean Theme + Dark Mode</title>
+  <!-- Bootswatch Cerulean (Bootstrap 5.3) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.2/dist/cerulean/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+  <style>
+    /* Chevron links */
+    .accordion-button::after { display: none; }
+    .accordion-button .chevron {
+      transition: transform 0.25s ease;
+      margin-right: .5rem;
+    }
+    .accordion-button.collapsed .chevron { transform: rotate(0deg); }
+    .accordion-button:not(.collapsed) .chevron { transform: rotate(90deg); }
+
+    /* Smooth animatie voor accordion panels */
+    .accordion-collapse {
+      transition: max-height 0.35s ease, opacity 0.35s ease;
+      overflow: hidden;
+    }
+    .accordion-collapse.collapsing {
+      opacity: 0.5;
+    }
+    .accordion-collapse.collapse.show {
+      opacity: 1;
+      max-height: 1000px; /* voldoende ruimte */
+    }
+
+    /* Toggle knop */
+    #darkModeToggle {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      z-index: 1040;
+    }
+
+    /* Achtergrond per theme */
+    :root[data-bs-theme="light"] body { background-color: #f8f9fa; }
+    :root[data-bs-theme="dark"] body { background-color: #121212; }
+	   ul.world-list {
+      list-style: none; /* geen standaard bolletjes */
+      padding: 0;
+      margin: 0;
+    }
+    <style>
+    ul.world-list {
+      list-style: none; /* geen standaard bullets */
+      padding: 0;
+      margin: 0;
+    }
+    ul.world-list li {
+      display: flex;
+      align-items: center;
+      margin: 10px 0;
+      font-size: 1rem;
+    }
+    /* Vierkantje */
+    ul.world-list li .square {
+      width: 5px;
+      height: 5px;
+      background-color: #0d6efd; /* blauw */
+      margin-right: 6px; /* afstand tot wereldbol */
+      display: inline-block;
+    }
+    /* Wereldbol icoon */
+    ul.world-list li i {
+      color: #0d6efd;
+      margin-right: 8px; /* afstand tot link */
+      font-size: 1.2rem;
+      transition: color 0.3s ease;
+    }
+    /* Link styling */
+    ul.world-list li a {
+      text-decoration: none;
+      color: #0d6efd;
+      transition: color 0.3s ease;
+    }
+    ul.world-list li a:hover {
+      color: #084298;
+      text-decoration: underline;
+    }
+    ul.world-list li:hover i {
+      color: #084298;
+    }
+    ul.world-list li:hover .square {
+      background-color: #084298;
+    }
+  </style>
+</head>
+<body>
+  <button id="darkModeToggle" class="btn btn-outline-dark">🌙 Dark Mode</button>
+
+  <div class="container py-5">
+    <h1 class="mb-4 text-center">Multilevel Accordion met Cerulean Theme</h1>
+
+    <div class="accordion" id="accordionLevel1">
+      <!-- Item 1 -->
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingOne">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+            <span class="chevron">▶</span> Wat is een accordion?
+          </button>
+        </h2>
+        <div id="collapseOne" class="accordion-collapse collapse">
+          <div class="accordion-body">
+            Een accordion is een UI‑component waarmee je secties kunt open- en dichtklappen.
+          </div>
+        </div>
+      </div>
+
+      <!-- Item 2 met nested accordion -->
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingTwo">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
+            <span class="chevron">▶</span> Geneste accordion
+          </button>
+        </h2>
+        <div id="collapseTwo" class="accordion-collapse collapse">
+          <div class="accordion-body">
+            <p>Hieronder staat een tweede niveau accordion:</p>
+            <div class="accordion mt-2" id="accordionLevel2">
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="headingTwoA">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwoA">
+                    <span class="chevron">▶</span> Subonderwerp A
+                  </button>
+                </h2>
+                <div id="collapseTwoA" class="accordion-collapse collapse">
+                  <div class="accordion-body">
+                    Inhoud van subonderwerp A. Bijvoorbeeld uitleg over installatie.
+                  </div>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="headingTwoB">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwoB">
+                    <span class="chevron">▶</span> Subonderwerp B
+                  </button>
+                </h2>
+                <div id="collapseTwoB" class="accordion-collapse collapse">
+                  <div class="accordion-body">
+                    Inhoud van subonderwerp B. Bijvoorbeeld styling en CSS tips.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Item 3 -->
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingThree">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree">
+            <span class="chevron">▶</span> Voordelen
+          </button>
+        </h2>
+        <div id="collapseThree" class="accordion-collapse collapse">
+          <div class="accordion-body">
+            <ul class="world-list">
+              <li>Compacte weergave van veel informatie</li>
+              <li>Gebruiksvriendelijk en overzichtelijk</li>
+              <li>Gemakkelijk te stylen met CSS</li>
+              <li>Responsief dankzij Bootstrap 5</li>
+              <li>Volledige dark-mode voor de hele pagina</li>
+              <li>Nu met Cerulean kleuren en fonts</li>
+              <li>Meerdere items kunnen tegelijk openstaan</li>
+              <li>Smooth animatie bij openen/sluiten</li>
+              <li>Automatische dark-mode detectie</li>
+			  <li>
+				<span class="square"></span>
+				<i class="bi bi-globe"></i>
+				<a href="https://www.example.com" target="_blank">Bezoek Example.com</a>
+			  </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap 5 JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const toggleBtn = document.getElementById('darkModeToggle');
+    const root = document.documentElement;
+
+    // Automatische detectie van systeeminstelling
+    let savedTheme = localStorage.getItem('theme');
+    if (!savedTheme) {
+      savedTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+    root.setAttribute('data-bs-theme', savedTheme);
+    setToggleAppearance(savedTheme);
+
+    toggleBtn.addEventListener('click', () => {
+      const current = root.getAttribute('data-bs-theme') === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-bs-theme', current);
+      localStorage.setItem('theme', current);
+      setToggleAppearance(current);
+    });
+
+    function setToggleAppearance(theme) {
+      if (theme === 'dark') {
+        toggleBtn.textContent = '☀️ Light Mode';
+        toggleBtn.classList.remove('btn-outline-dark');
+        toggleBtn.classList.add('btn-outline-light');
+      } else {
+        toggleBtn.textContent = '🌙 Dark Mode';
+        toggleBtn.classList.remove('btn-outline-light');
+        toggleBtn.classList.add('btn-outline-dark');
+      }
+    }
+  </script>
+</body>
+</html>
