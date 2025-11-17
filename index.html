@@ -50,51 +50,46 @@
     ul.world-list {
       list-style: none; /* geen standaard bullets */
       padding: 0;
-      margin: 0;
+      margin: 0; 
     }
     ul.world-list li {
       display: flex;
       align-items: center;
-      margin: 10px 0;
+      margin: 5px 0;
       font-size: 1rem;
     }
     /* Vierkantje */
     ul.world-list li .square {
       width: 5px;
       height: 5px;
-      background-color: #0d6efd; /* blauw */
-      margin-right: 6px; /* afstand tot wereldbol */
+	  background-color: #2FA4E7; /* cerulean blauw */
+	  margin-left : 20px;
+      margin-right: 4px; /* afstand tot wereldbol */
       display: inline-block;
     }
     /* Wereldbol icoon */
     ul.world-list li i {
-      color: #0d6efd;
       margin-right: 8px; /* afstand tot link */
-      font-size: 1.2rem;
+      font-size: 0.7rem;
       transition: color 0.3s ease;
     }
     /* Link styling */
     ul.world-list li a {
       text-decoration: none;
-      color: #0d6efd;
       transition: color 0.3s ease;
     }
     ul.world-list li a:hover {
-      color: #084298;
       text-decoration: underline;
-    }
-    ul.world-list li:hover i {
-      color: #084298;
-    }
-    ul.world-list li:hover .square {
-      background-color: #084298;
-    }
+    } 
+
   </style>
 </head>
 <body>
-  <button id="darkModeToggle" class="btn btn-outline-dark">🌙 Dark Mode</button>
-
-  <div class="container py-5">
+  <button id="darkModeToggle" class="btn btn-outline-dark">🌙</button>
+<div class="container mb-5">
+  <p>&nbsp;</p>
+</div>
+  <div class="container border shadow-sm py-5 rounded">
     <h1 class="mb-4 text-center">Multilevel Accordion met Cerulean Theme</h1>
 
     <div class="accordion" id="accordionLevel1">
@@ -102,7 +97,8 @@
       <div class="accordion-item">
         <h2 class="accordion-header" id="headingOne">
           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
-            <span class="chevron">▶</span> Wat is een accordion?
+            <!-- <span class="chevron text-primary">▶</span> Wat is een accordion? -->
+			<span class="chevron text-primary"><i class="bi bi-arrow-down-circle"></i></span> Wat is een accordion?
           </button>
         </h2>
         <div id="collapseOne" class="accordion-collapse collapse">
@@ -116,7 +112,7 @@
       <div class="accordion-item">
         <h2 class="accordion-header" id="headingTwo">
           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
-            <span class="chevron">▶</span> Geneste accordion
+            <span class="chevron text-primary"><i class="bi bi-arrow-down-circle"></i></span> Geneste accordion
           </button>
         </h2>
         <div id="collapseTwo" class="accordion-collapse collapse">
@@ -126,7 +122,7 @@
               <div class="accordion-item">
                 <h2 class="accordion-header" id="headingTwoA">
                   <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwoA">
-                    <span class="chevron">▶</span> Subonderwerp A
+                    <span class="chevron text-primary"><i class="bi bi-arrow-down-circle"></i></span> Subonderwerp A
                   </button>
                 </h2>
                 <div id="collapseTwoA" class="accordion-collapse collapse">
@@ -138,7 +134,7 @@
               <div class="accordion-item">
                 <h2 class="accordion-header" id="headingTwoB">
                   <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwoB">
-                    <span class="chevron">▶</span> Subonderwerp B
+                    <span class="chevron text-primary"><i class="bi bi-arrow-down-circle"></i></span> Subonderwerp B
                   </button>
                 </h2>
                 <div id="collapseTwoB" class="accordion-collapse collapse">
@@ -156,7 +152,7 @@
       <div class="accordion-item">
         <h2 class="accordion-header" id="headingThree">
           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree">
-            <span class="chevron">▶</span> Voordelen
+            <span class="chevron text-primary"><i class="bi bi-arrow-down-circle"></i></span> Voordelen
           </button>
         </h2>
         <div id="collapseThree" class="accordion-collapse collapse">
@@ -173,7 +169,20 @@
               <li>Automatische dark-mode detectie</li>
 			  <li>
 				<span class="square"></span>
-				<i class="bi bi-globe"></i>
+				<!-- <i class="bi bi-square-fill fs-6 text-primary"></i> -->
+				<i class="bi bi-globe text-primary"></i>
+				<a href="https://www.example.com" target="_blank">Bezoek Example.com</a>
+			  </li>
+			  		  <li>
+				<span class="square"></span>
+				<!-- <i class="bi bi-square-fill fs-6 text-primary"></i> -->
+				<i class="bi bi-globe text-primary"></i>
+				<a href="https://www.example.com" target="_blank">Bezoek Example.com</a>
+			  </li>
+			  		  <li>
+				<span class="square"></span>
+				<!-- <i class="bi bi-square-fill fs-6 text-primary"></i> -->
+				<i class="bi bi-globe text-primary"></i>
 				<a href="https://www.example.com" target="_blank">Bezoek Example.com</a>
 			  </li>
             </ul>
@@ -206,11 +215,11 @@
 
     function setToggleAppearance(theme) {
       if (theme === 'dark') {
-        toggleBtn.textContent = '☀️ Light Mode';
+        toggleBtn.textContent = '☀️';
         toggleBtn.classList.remove('btn-outline-dark');
         toggleBtn.classList.add('btn-outline-light');
       } else {
-        toggleBtn.textContent = '🌙 Dark Mode';
+        toggleBtn.textContent = '🌙';
         toggleBtn.classList.remove('btn-outline-light');
         toggleBtn.classList.add('btn-outline-dark');
       }
