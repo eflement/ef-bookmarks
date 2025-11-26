@@ -1,548 +1,603 @@
 <!DOCTYPE html>
 <html lang="nl" data-bs-theme="light">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>EF Bookmarks</title>
-  <meta name="robots" content="noindex,nofollow"/>
+	<title>EF Bookmarks</title>
+	<meta name="robots" content="noindex,nofollow" />
 
-  <!-- Bootswatch Cerulean (Bootstrap 5.3) -->
-  <link href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.2/dist/cerulean/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
-  <link rel="icon" type="image/x-icon" href="favicon.ico" />
-  <link rel="icon" type="image/png" href="apple-touch-icon.png" />
-  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
-  <style>
-    /* Chevron links */
-    .accordion-button::after { display: none; }
-    .accordion-button .chevron {
-      transition: transform 0.25s ease;
-      margin-right: .5rem;
-    }
-    .accordion-button.collapsed .chevron { transform: rotate(0deg); }
-    .accordion-button:not(.collapsed) .chevron { transform: rotate(90deg); }
+	<!-- Bootswatch Cerulean (Bootstrap 5.3) -->
+	<link href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.2/dist/cerulean/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+	<link rel="icon" type="image/x-icon" href="favicon.ico" />
+	<link rel="icon" type="image/png" href="apple-touch-icon.png" />
+	<link rel="apple-touch-icon" href="apple-touch-icon.png" />
+	<style>
+		/* Chevron links */
+		.accordion-button::after {
+			display: none;
+		}
 
-    /* Smooth animatie voor accordion panels */
-    .accordion-collapse {
-      transition: max-height 0.35s ease, opacity 0.35s ease;
-      overflow: hidden;
-    }
-    .accordion-collapse.collapsing {
-      opacity: 0.5;
-    }
-    .accordion-collapse.collapse.show {
-      opacity: 1;
-      max-height: 1000px; /* voldoende ruimte */
-    }
+		.accordion-button .chevron {
+			transition: transform 0.25s ease;
+			margin-right: .5rem;
+		}
 
-    /* Toggle knop */
-    #darkModeToggle {
-      position: fixed;
-      top: 16px;
-      right: 16px;
-      z-index: 1040;
-    }
+		.accordion-button.collapsed .chevron {
+			transform: rotate(0deg);
+		}
 
-    /* Achtergrond per theme */
-    :root[data-bs-theme="light"] body { background-color: #f8f9fa; }
-    :root[data-bs-theme="dark"] body { background-color: #121212; }
-	   ul.world-list {
-      list-style: none; /* geen standaard bolletjes */
-      padding: 0;
-      margin: 0;
-    }
-    <style>
-    ul.world-list {
-      list-style: none; /* geen standaard bullets */
-      padding: 0;
-      margin: 0; 
-    }
-    ul.world-list li {
-      display: flex;
-      align-items: center;
-      margin: 5px 0;
-      font-size: 1rem;
-    }
-    /* Vierkantje */
-    ul.world-list li .square {
-      width: 5px;
-      height: 5px;
-	  background-color: #2FA4E7; /* cerulean blauw */
-	  margin-left : 20px;
-      margin-right: 4px; /* afstand tot wereldbol */
-      display: inline-block;
-    }
-    /* Wereldbol icoon */
-    ul.world-list li i {
-      margin-right: 8px; /* afstand tot link */
-      font-size: 1.1rem;
-      transition: color 0.3s ease;
-    }
-    /* Link styling */
-    ul.world-list li a {
-      text-decoration: none;
-      transition: color 0.3s ease;
-    }
-    ul.world-list li a:hover {
-      text-decoration: underline;
-    } 
+		.accordion-button:not(.collapsed) .chevron {
+			transform: rotate(90deg);
+		}
 
-  </style>
+		/* Smooth animatie voor accordion panels */
+		.accordion-collapse {
+			transition: max-height 0.35s ease, opacity 0.35s ease;
+			overflow: hidden;
+		}
+
+		.accordion-collapse.collapsing {
+			opacity: 0.5;
+		}
+
+		.accordion-collapse.collapse.show {
+			opacity: 1;
+			max-height: 1000px;
+			/* voldoende ruimte */
+		}
+
+		/* Toggle knop */
+		#darkModeToggle {
+			position: fixed;
+			top: 16px;
+			right: 16px;
+			z-index: 1040;
+		}
+
+		/* Achtergrond per theme */
+		:root[data-bs-theme="light"] body {
+			background-color: #f8f9fa;
+		}
+
+		:root[data-bs-theme="dark"] body {
+			background-color: #121212;
+		}
+
+		ul.world-list {
+			list-style: none;
+			/* geen standaard bolletjes */
+			padding: 0;
+			margin: 0;
+		}
+
+		ul.world-list li {
+			display: flex;
+			align-items: center;
+			margin: 5px 0;
+			font-size: 1rem;
+		}
+
+		/* Vierkantje */
+		ul.world-list li .square {
+			width: 5px;
+			height: 5px;
+			background-color: #2FA4E7;
+			/* cerulean blauw */
+			margin-left: 20px;
+			margin-right: 4px;
+			/* afstand tot wereldbol */
+			display: inline-block;
+		}
+
+		/* Wereldbol icoon */
+		ul.world-list li i {
+			margin-right: 8px;
+			/* afstand tot link */
+			font-size: 1.1rem;
+			transition: color 0.3s ease;
+		}
+
+		/* Link styling */
+		ul.world-list li a {
+			text-decoration: none;
+			transition: color 0.3s ease;
+		}
+
+		ul.world-list li a:hover {
+			text-decoration: underline;
+		}
+	</style>
 </head>
+
 <body>
-  <button id="darkModeToggle" class="btn btn-outline-dark">🌙</button>
-<div class="container mb-5">
-  <p>&nbsp;</p>
-</div>
+	<button id="darkModeToggle" class="btn btn-outline-dark">🌙</button>
+	<div class="container mb-5">
+		<p>&nbsp;</p>
+	</div>
 
-<div class="container border shadow-sm  py-2 rounded">
-  
-	<h2 class="mb-2 text-center"><img src="images/logo-blue.svg" alt="logo / width="50" height="50">&nbsp;Bookmarks</h2> 
-	
-    <div class="accordion" id="accordionLevel1">
-      <!-- Item 1 -->
-      <div class="accordion-item">
-        <h2 class="accordion-header" id="headingOne">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
-            <!-- <span class="chevron text-primary">▶</span> Wat is een accordion? -->
-			<span class="chevron text-primary"><i class="bi bi-arrow-down-circle fs-5"></i></span> Algemeen
-          </button>
-        </h2>
-        <div id="collapseOne" class="accordion-collapse collapse show">
-          <div class="accordion-body">
-			<ul class="world-list">
-				<li>
-					<span class="square"></span>
-					<i class="bi bi-globe text-primary"></i>
-					<!-- <a href="https://pwd.flement.org/" target="_blank">Password Generator</a> -->
-					<a href="pwd.html" target="_blank">Password Generator</a>
-				</li>
-				<!--<li>
-					<span class="square"></span>
-					<i class="bi bi-globe text-primary"></i>
-					<a href="https://bm.flement.org/ef" target="_blank">Old bookmarks</a>
-				</li> -->
-				<li>
-					<span class="square"></span>
-					<i class="bi bi-globe text-primary"></i>
-					<a href="https://search.flement.org/" target="_blank">My search</a>
-				</li>
-				<li>
-					<span class="square"></span>
-					<i class="bi bi-globe text-primary"></i>
-					<a href="https://web.belga.press/" target="_blank">Belga press</a>
-				</li>
-				<li>
-					<span class="square"></span>
-					<i class="bi bi-globe text-primary"></i>
-					<a href="https://www.demorgen.be/" target="_blank">De Morgen</a>
-				</li>
-				<li>
-					<span class="square"></span>
-					<i class="bi bi-globe text-primary"></i>
-					<a href="https://www.standaard.be/" target="_blank">De Standaard</a>
-				</li>
-				</li>
-				<li>
-					<span class="square"></span>
-					<i class="bi bi-globe text-primary"></i>
-					<a href="https://www.nieuwsblad.be/" target="_blank">Het Nieuwsblad</a>
-				</li>
-				<li>
-					<span class="square"></span>
-					<i class="bi bi-globe text-primary"></i>
-					<a href="https://www.hln.be/" target="_blank">Het Laatste Nieuws</a>
-				</li>
-				<li>
-					<span class="square"></span>
-					<i class="bi bi-globe text-primary"></i>
-					<a href="https://www.theguardian.com/" target="_blank">The Guardian</a>
-				</li>
-            </ul>
-          </div>
-        </div>
-      </div>
+	<div class="container border shadow-sm  py-2 rounded">
 
-      <!-- Item 2 met nested accordion -->
-      <div class="accordion-item">
-        <h2 class="accordion-header" id="headingTwo">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
-            <span class="chevron text-primary"><i class="bi bi-arrow-down-circle fs-5"></i></span> EF
-          </button>
-        </h2>
-        <div id="collapseTwo" class="accordion-collapse collapse">
-          <div class="accordion-body">
-			<ul class="world-list">
-				<li>
-					<span class="square"></span>
-					<i class="bi bi-globe text-primary"></i>
-					<a href="https://whatismyipaddress.com/" target="_blank">What is my ip address</a>
-				</li>
-				<li>
-					<span class="square"></span>
-					<i class="bi bi-globe text-primary"></i>
-					<a href="https://one.one.one.one/help/" target="_blank">Cloudflare DNS settings</a>
-				</li>
-				<li>
-					<span class="square"></span>
-					<i class="bi bi-globe text-primary"></i>
-					<a href="https://my.nextdns.io/" target="_blank">NextDNS</a>
-				</li>
-			</ul>
-			<ul class="world-list">
-				<li>
-					<span class="square"></span>
-					<i class="bi bi-globe text-primary"></i>
-					<a href="http://asus-wifi.flement.org/Main_Login.asp" target="_blank">Asus router</a>
-				</li>
-			</ul>
-			<ul class="world-list">
-				<li>
-					<span class="square"></span>
-					<i class="bi bi-globe text-primary"></i>
-					<a href="https://mykiln.eu/" target="_blank">Rhode oven</a>
-				</li>
-			</ul>
-			<ul class="world-list">
-				
-			</ul>
-			<ul class="world-list">
-				<li>
-					<span class="square"></span>
-					<i class="bi bi-globe text-primary"></i>
-					<a href="https://minesweeperonline.com/#" target="_blank">Minesweeper</a>
-				</li>
-				<li>
-					<span class="square"></span>
-					<i class="bi bi-globe text-primary"></i>
-					<a href="https://docs.google.com/spreadsheets/d/1ft535DbQhGE_JLFu7l4odKbj25m6QoEunNZ0ARe8cTY/edit?pli=1&gid=0#gid=0" target="_blank">Keramica agenda</a>
-				</li>
-			</ul>
+		<h2 class="mb-2 text-center"><img src="images/logo-blue.svg" alt="logo / width=" 50" height="50">&nbsp;Bookmarks
+		</h2>
 
-            <div class="accordion mt-2" id="accordionLevel2">
-			
-				<!-- start item 2A -->
-				<div class="accordion-item">
-					<h2 class="accordion-header" id="headingTwoA">
-						<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwoA">
-							<span class="chevron text-primary"><i class="bi bi-arrow-down-circle fs-5"></i></span> Beurs
-						</button>
-					</h2>
-					<div id="collapseTwoA" class="accordion-collapse collapse">
-						<div class="accordion-body">
-							<ul class="world-list">
+		<div class="accordion" id="accordionLevel1">
+			<!-- Item 1 -->
+			<div class="accordion-item">
+				<h2 class="accordion-header" id="headingOne">
+					<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+						data-bs-target="#collapseOne">
+						<!-- <span class="chevron text-primary">▶</span> Wat is een accordion? -->
+						<span class="chevron text-primary"><i class="bi bi-arrow-down-circle fs-5"></i></span> Algemeen
+					</button>
+				</h2>
+				<div id="collapseOne" class="accordion-collapse collapse show">
+					<div class="accordion-body">
+						<ul class="world-list">
 							<li>
 								<span class="square"></span>
-									<i class="bi bi-globe text-primary"></i>
-									<a href="https://btcdirect.eu/nl-nl/bitcoin-koers" target="_blank">Bitcoin koers</a>
-									</li>
-								<li>
-									<span class="square"></span>
-									<i class="bi bi-globe text-primary"></i>
-									<a href="https://platform.bolero.be/login" target="_blank">Bolero</a>
-								</li>
-								<li>
-									<span class="square"></span>
-										<i class="bi bi-globe text-primary"></i>
-										<a href="https://www.justetf.com/" target="_blank">Just ETF</a>
-								</li>
-								<li>
-									<span class="square"></span>
-										<i class="bi bi-globe text-primary"></i>
-										<a href="https://www.morningstar.be/be/screener/etf.aspx" target="_blank">Morningstar</a>
-								</li>
-								<li>
-									<span class="square"></span>
-										<i class="bi bi-globe text-primary"></i>
-										<a href="https://curvo.eu/backtest" target="_blank">Curvo backtest</a>
-								</li>
-								<li>
-									<span class="square"></span>
-										<i class="bi bi-globe text-primary"></i>
-										<a href="https://nl.investing.com/" target="_blank">Investing</a>
-								</li>
-								<li>
-									<span class="square"></span>
-										<i class="bi bi-globe text-primary"></i>
-										<a href="https://www.trackingdifferences.com/" target="_blank">ETF Tracking differences</a>
-								</li>
-								<li>
-									<span class="square"></span>
-										<i class="bi bi-globe text-primary"></i>
-										<a href="https://siblisresearch.com/data/cape-ratios-by-country/" target="_blank">Siblis research- CAPE analysis</a>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-				<!-- end item 2A -->
-				<!-- start item 2B -->
-				<div class="accordion-item">
-					<h2 class="accordion-header" id="headingTwoB">
-						<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwoB">
-							<span class="chevron text-primary"><i class="bi bi-arrow-down-circle fs-5"></i></span> Proxmox
-						</button>
-					</h2>
-					<div id="collapseTwoB" class="accordion-collapse collapse">
-						<div class="accordion-body">
-							<div class="accordion" id="accordionLevel3">
-								<div class="accordion-item">
-									<h2 class="accordion-header" id="heading3A">
-										<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3A">
-											<span class="chevron text-primary"><i class="bi bi-arrow-down-circle fs-5"></i></span> Extern
-										</button>
-									</h2>
-										<div id="collapse3A" class="accordion-collapse collapse">
-											<div class="accordion-body">
-												<ul class="world-list">
-													<li>
-														<span class="square"></span>
-														<i class="bi bi-globe text-primary"></i>
-														<a href="https://ppve.flement.org/" target="_blank">ppve</a>
-													</li>
-													<li>
-														<span class="square"></span>
-														<i class="bi bi-globe text-primary"></i>
-														<a href="https://ppbs.flement.org/" target="_blank">ppbs</a>
-													</li>
-													<li>
-														<span class="square"></span>
-														<i class="bi bi-globe text-primary"></i>
-														<a href="https://vaultwarden.flement.org/" target="_blank">vaultwarden</a>
-													</li>
-													<li>
-														<span class="square"></span>
-														<i class="bi bi-globe text-primary"></i>
-														<a href="https://pictures.flement.org/" target="_blank">pictures</a>
-													</li>
-													<li>
-														<span class="square"></span>
-														<i class="bi bi-globe text-primary"></i>
-														<a href="https://nextcloud.flement.org/" target="_blank">nextcloud</a>
-													</li>
-												</ul>
-											</div> <!-- end accordion-body -->
-										</div> 	<!-- end collapse3A -->
-								</div> <!-- end acoordion-item -->
-	
-								<div class="accordion-item">
-									<h2 class="accordion-header" id="heading3B">
-										<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3B">
-											<span class="chevron text-primary"><i class="bi bi-arrow-down-circle fs-5"></i></span> Intern
-										</button>
-									</h2>
-										<div id="collapse3B" class="accordion-collapse collapse">
-											<div class="accordion-body">
-												<ul class="world-list">
-													<li>
-														<span class="square"></span>
-														<i class="bi bi-globe text-primary"></i>
-														<a href="https://pve.flement.org:8006/" target="_blank">pve</a>
-													</li>
-													<li>
-														<span class="square"></span>
-														<i class="bi bi-globe text-primary"></i>
-														<a href="http://lpihole.flement.org/admin" target="_blank">lpihole</a>
-													</li>
-													<li>
-														<span class="square"></span>
-														<i class="bi bi-globe text-primary"></i>
-														<a href="https://dpihole.flement.org/admin" target="_blank">dpihole</a>
-													</li>
-													<li>
-														<span class="square"></span>
-														<i class="bi bi-globe text-primary"></i>
-														<a href="http://192.168.0.2:500/admin" target="_blank">dpihole - no https</a>
-													</li>
-													<li>
-														<span class="square"></span>
-														<i class="bi bi-globe text-primary"></i>
-														<a href="https://pbs.flement.org:8007/" target="_blank">pbs</a>
-													</li>
-													<li>
-														<span class="square"></span>
-														<i class="bi bi-globe text-primary"></i>
-														<a href="https://portainer-traefik.flement.org/" target="_blank">portainer-ptraefik</a>
-													</li>
-													<li>
-														<span class="square"></span>
-														<i class="bi bi-globe text-primary"></i>
-														<a href="https://caddy-portainer.flement.org/" target="_blank">portainer-pcaddy</a>
-													</li>
-													<li>
-														<span class="square"></span>
-														<i class="bi bi-globe text-primary"></i>
-														<a href="https://portainer-pnginx.flement.org:9443/" target="_blank">portainer-pnginx</a>
-													</li>
-													<li>
-														<span class="square"></span>
-														<i class="bi bi-globe text-primary"></i>
-														<a href="https://traefik-dashboard.flement.org/" target="_blank">traefik dashboard</a>
-													</li>
-													<li>
-														<span class="square"></span>
-														<i class="bi bi-globe text-primary"></i>
-														<a href="https://uptime-kuma.flement.org/" target="_blank">uptime-kuma</a>
-													</li>
-													<li>
-														<span class="square"></span>
-														<i class="bi bi-globe text-primary"></i>
-														<a href="https://gotify.flement.org/" target="_blank">gotify</a>
-													</li>
-													<li>
-														<span class="square"></span>
-														<i class="bi bi-globe text-primary"></i>
-														<a href="http://immich.flement.org:2283/" target="_blank">immich</a>
-													</li>
-													<li>
-														<span class="square"></span>
-														<i class="bi bi-globe text-primary"></i>
-														<a href="https://pnginx.flement.org/" target="_blank">nginx</a>
-													</li>
-													<li>
-														<span class="square"></span>
-														<i class="bi bi-globe text-primary"></i>
-														<a href="https://omni-tools.flement.org/" target="_blank">omni-tools</a>
-													</li>
-													<li>
-														<span class="square"></span>
-														<i class="bi bi-globe text-primary"></i>
-														<a href="https://it-tools.flement.org/" target="_blank">it-tools</a>
-													</li>
-													<li>
-														<span class="square"></span>
-														<i class="bi bi-globe text-primary"></i>
-														<a href="https://psynology.flement.org/" target="_blank">synology</a>
-													</li>
-												</ul>
-											</div> <!-- end accordion-body -->
-										</div> 	<!-- end collapse3B -->
-								</div> <!-- end acoordion-item -->
-							</div> 	<!-- end accordionLevel3 -->
-						</div>
-					</div>
-				</div>
-				<!-- end item 2B -->
-				<!-- start item 2C -->
-				<div class="accordion-item">
-					<h2 class="accordion-header" id="headingTwoC">
-						<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwoC">
-							<span class="chevron text-primary"><i class="bi bi-arrow-down-circle fs-5"></i></span> Varia
-						</button>
-					</h2>
-					<div id="collapseTwoC" class="accordion-collapse collapse">
-						<div class="accordion-body">
-							<ul class="world-list">
-								<li>
-									<span class="square"></span>
-									<i class="bi bi-globe text-primary"></i>
-									<a href="https://www.wunderground.com/dashboard/pws/ILIEVE23" target="_blank">My weatherstation - wunderground</a>
-								</li>
-								<li>
+								<i class="bi bi-globe text-primary"></i>
+								<!-- <a href="https://pwd.flement.org/" target="_blank">Password Generator</a> -->
+								<a href="pwd.html" target="_blank">Password Generator</a>
+							</li>
+							<li>
 								<span class="square"></span>
 								<i class="bi bi-globe text-primary"></i>
-								<a href="https://app.weathercloud.net/d3105211632#profile" target="_blank">My weatherstation - weathercloud</a>
-								</li>
-								<li>
-									<span class="square"></span>
-										<i class="bi bi-globe text-primary"></i>
-										<a href="https://www2.telenet.be/residential/nl/landingspaginas/speedtest.html" target="_blank">Telenet speedtest</a>
-								</li>
-								<li>
-									<span class="square"></span>
-									<i class="bi bi-globe text-primary"></i>
-									<a href="https://test-ipv6.com/" target="_blank">Test IP v6 settings</a>
-								</li>
-								<li>
-									<span class="square"></span>
-										<i class="bi bi-globe text-primary"></i>
-										<a href="https://dnschecker.org/all-tools.php" target="_blank">DNS Checker</a>
-								</li>
-								<li>
-									<span class="square"></span>
-										<i class="bi bi-globe text-primary"></i>
-										<a href="https://www.whynopadlock.com/" target="_blank">Test gebruik van https op een website</a>
-								</li>
-								<li>
-									<span class="square"></span>
-										<i class="bi bi-globe text-primary"></i>
-										<a href="http://bookszlibb74ugqojhzhg2a63w5i2atv5bqarulgczawnbmsb6s6qead.onion/" target="_blank">z-libray</a>
-								</li>
-							</ul>
+								<a href="https://search.flement.org/" target="_blank">My search</a>
+							</li>
+							<li>
+								<span class="square"></span>
+								<i class="bi bi-globe text-primary"></i>
+								<a href="https://web.belga.press/" target="_blank">Belga press</a>
+							</li>
+							<li>
+								<span class="square"></span>
+								<i class="bi bi-globe text-primary"></i>
+								<a href="https://www.demorgen.be/" target="_blank">De Morgen</a>
+							</li>
+							<li>
+								<span class="square"></span>
+								<i class="bi bi-globe text-primary"></i>
+								<a href="https://www.standaard.be/" target="_blank">De Standaard</a>
+							</li>
+							</li>
+							<li>
+								<span class="square"></span>
+								<i class="bi bi-globe text-primary"></i>
+								<a href="https://www.nieuwsblad.be/" target="_blank">Het Nieuwsblad</a>
+							</li>
+							<li>
+								<span class="square"></span>
+								<i class="bi bi-globe text-primary"></i>
+								<a href="https://www.hln.be/" target="_blank">Het Laatste Nieuws</a>
+							</li>
+							<li>
+								<span class="square"></span>
+								<i class="bi bi-globe text-primary"></i>
+								<a href="https://www.theguardian.com/" target="_blank">The Guardian</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+
+			<!-- Item 2 met nested accordion -->
+			<div class="accordion-item">
+				<h2 class="accordion-header" id="headingTwo">
+					<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+						data-bs-target="#collapseTwo">
+						<span class="chevron text-primary"><i class="bi bi-arrow-down-circle fs-5"></i></span> EF
+					</button>
+				</h2>
+				<div id="collapseTwo" class="accordion-collapse collapse">
+					<div class="accordion-body">
+						<ul class="world-list">
+							<li>
+								<span class="square"></span>
+								<i class="bi bi-globe text-primary"></i>
+								<a href="https://whatismyipaddress.com/" target="_blank">What is my ip address</a>
+							</li>
+							<li>
+								<span class="square"></span>
+								<i class="bi bi-globe text-primary"></i>
+								<a href="https://one.one.one.one/help/" target="_blank">Cloudflare DNS settings</a>
+							</li>
+							<li>
+								<span class="square"></span>
+								<i class="bi bi-globe text-primary"></i>
+								<a href="https://my.nextdns.io/" target="_blank">NextDNS</a>
+							</li>
+							<li>
+								<span class="square"></span>
+								<i class="bi bi-globe text-primary"></i>
+								<a href="http://asus-wifi.flement.org/Main_Login.asp" target="_blank">Asus router</a>
+							</li>
+							<li>
+								<span class="square"></span>
+								<i class="bi bi-globe text-primary"></i>
+								<a href="https://mykiln.eu/" target="_blank">Rhode oven</a>
+							</li>
+							<li>
+								<span class="square"></span>
+								<i class="bi bi-globe text-primary"></i>
+								<a href="https://minesweeperonline.com/#" target="_blank">Minesweeper</a>
+							</li>
+							<li>
+								<span class="square"></span>
+								<i class="bi bi-globe text-primary"></i>
+								<a href="https://docs.google.com/spreadsheets/d/1ft535DbQhGE_JLFu7l4odKbj25m6QoEunNZ0ARe8cTY/edit?pli=1&gid=0#gid=0"
+									target="_blank">Keramica agenda</a>
+							</li>
+						</ul>
+
+						<div class="accordion mt-2" id="accordionLevel2">
+
+							<!-- start item 2A -->
+							<div class="accordion-item">
+								<h2 class="accordion-header" id="headingTwoA">
+									<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+										data-bs-target="#collapseTwoA">
+										<span class="chevron text-primary"><i
+												class="bi bi-arrow-down-circle fs-5"></i></span> Beurs
+									</button>
+								</h2>
+								<div id="collapseTwoA" class="accordion-collapse collapse">
+									<div class="accordion-body">
+										<ul class="world-list">
+											<li>
+												<span class="square"></span>
+												<i class="bi bi-globe text-primary"></i>
+												<a href="https://btcdirect.eu/nl-nl/bitcoin-koers"
+													target="_blank">Bitcoin koers</a>
+											</li>
+											<li>
+												<span class="square"></span>
+												<i class="bi bi-globe text-primary"></i>
+												<a href="https://platform.bolero.be/login" target="_blank">Bolero</a>
+											</li>
+											<li>
+												<span class="square"></span>
+												<i class="bi bi-globe text-primary"></i>
+												<a href="https://www.justetf.com/" target="_blank">Just ETF</a>
+											</li>
+											<li>
+												<span class="square"></span>
+												<i class="bi bi-globe text-primary"></i>
+												<a href="https://www.morningstar.be/be/screener/etf.aspx"
+													target="_blank">Morningstar</a>
+											</li>
+											<li>
+												<span class="square"></span>
+												<i class="bi bi-globe text-primary"></i>
+												<a href="https://curvo.eu/backtest" target="_blank">Curvo backtest</a>
+											</li>
+											<li>
+												<span class="square"></span>
+												<i class="bi bi-globe text-primary"></i>
+												<a href="https://nl.investing.com/" target="_blank">Investing</a>
+											</li>
+											<li>
+												<span class="square"></span>
+												<i class="bi bi-globe text-primary"></i>
+												<a href="https://www.trackingdifferences.com/" target="_blank">ETF
+													Tracking differences</a>
+											</li>
+											<li>
+												<span class="square"></span>
+												<i class="bi bi-globe text-primary"></i>
+												<a href="https://siblisresearch.com/data/cape-ratios-by-country/"
+													target="_blank">Siblis research- CAPE analysis</a>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+							<!-- end item 2A -->
+							<!-- start item 2B -->
+							<div class="accordion-item">
+								<h2 class="accordion-header" id="headingTwoB">
+									<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+										data-bs-target="#collapseTwoB">
+										<span class="chevron text-primary"><i
+												class="bi bi-arrow-down-circle fs-5"></i></span> Proxmox
+									</button>
+								</h2>
+								<div id="collapseTwoB" class="accordion-collapse collapse">
+									<div class="accordion-body">
+										<div class="accordion" id="accordionLevel3">
+											<div class="accordion-item">
+												<h2 class="accordion-header" id="heading3A">
+													<button class="accordion-button collapsed" type="button"
+														data-bs-toggle="collapse" data-bs-target="#collapse3A">
+														<span class="chevron text-primary"><i
+																class="bi bi-arrow-down-circle fs-5"></i></span> Extern
+													</button>
+												</h2>
+												<div id="collapse3A" class="accordion-collapse collapse">
+													<div class="accordion-body">
+														<ul class="world-list">
+															<li>
+																<span class="square"></span>
+																<i class="bi bi-globe text-primary"></i>
+																<a href="https://ppve.flement.org/"
+																	target="_blank">ppve</a>
+															</li>
+															<li>
+																<span class="square"></span>
+																<i class="bi bi-globe text-primary"></i>
+																<a href="https://ppbs.flement.org/"
+																	target="_blank">ppbs</a>
+															</li>
+															<li>
+																<span class="square"></span>
+																<i class="bi bi-globe text-primary"></i>
+																<a href="https://vaultwarden.flement.org/"
+																	target="_blank">vaultwarden</a>
+															</li>
+															<li>
+																<span class="square"></span>
+																<i class="bi bi-globe text-primary"></i>
+																<a href="https://pictures.flement.org/"
+																	target="_blank">pictures</a>
+															</li>
+															<li>
+																<span class="square"></span>
+																<i class="bi bi-globe text-primary"></i>
+																<a href="https://nextcloud.flement.org/"
+																	target="_blank">nextcloud</a>
+															</li>
+														</ul>
+													</div> <!-- end accordion-body -->
+												</div> <!-- end collapse3A -->
+											</div> <!-- end acoordion-item -->
+
+											<div class="accordion-item">
+												<h2 class="accordion-header" id="heading3B">
+													<button class="accordion-button collapsed" type="button"
+														data-bs-toggle="collapse" data-bs-target="#collapse3B">
+														<span class="chevron text-primary"><i
+																class="bi bi-arrow-down-circle fs-5"></i></span> Intern
+													</button>
+												</h2>
+												<div id="collapse3B" class="accordion-collapse collapse">
+													<div class="accordion-body">
+														<ul class="world-list">
+															<li>
+																<span class="square"></span>
+																<i class="bi bi-globe text-primary"></i>
+																<a href="https://pve.flement.org:8006/"
+																	target="_blank">pve</a>
+															</li>
+															<li>
+																<span class="square"></span>
+																<i class="bi bi-globe text-primary"></i>
+																<a href="http://lpihole.flement.org/admin"
+																	target="_blank">lpihole</a>
+															</li>
+															<li>
+																<span class="square"></span>
+																<i class="bi bi-globe text-primary"></i>
+																<a href="https://dpihole.flement.org/admin"
+																	target="_blank">dpihole</a>
+															</li>
+															<li>
+																<span class="square"></span>
+																<i class="bi bi-globe text-primary"></i>
+																<a href="http://192.168.0.2:500/admin"
+																	target="_blank">dpihole - no https</a>
+															</li>
+															<li>
+																<span class="square"></span>
+																<i class="bi bi-globe text-primary"></i>
+																<a href="https://pbs.flement.org:8007/"
+																	target="_blank">pbs</a>
+															</li>
+															<li>
+																<span class="square"></span>
+																<i class="bi bi-globe text-primary"></i>
+																<a href="https://portainer-traefik.flement.org/"
+																	target="_blank">portainer-ptraefik</a>
+															</li>
+															<li>
+																<span class="square"></span>
+																<i class="bi bi-globe text-primary"></i>
+																<a href="https://caddy-portainer.flement.org/"
+																	target="_blank">portainer-pcaddy</a>
+															</li>
+															<li>
+																<span class="square"></span>
+																<i class="bi bi-globe text-primary"></i>
+																<a href="https://portainer-pnginx.flement.org:9443/"
+																	target="_blank">portainer-pnginx</a>
+															</li>
+															<li>
+																<span class="square"></span>
+																<i class="bi bi-globe text-primary"></i>
+																<a href="https://traefik-dashboard.flement.org/"
+																	target="_blank">traefik dashboard</a>
+															</li>
+															<li>
+																<span class="square"></span>
+																<i class="bi bi-globe text-primary"></i>
+																<a href="https://uptime-kuma.flement.org/"
+																	target="_blank">uptime-kuma</a>
+															</li>
+															<li>
+																<span class="square"></span>
+																<i class="bi bi-globe text-primary"></i>
+																<a href="https://gotify.flement.org/"
+																	target="_blank">gotify</a>
+															</li>
+															<li>
+																<span class="square"></span>
+																<i class="bi bi-globe text-primary"></i>
+																<a href="http://immich.flement.org:2283/"
+																	target="_blank">immich</a>
+															</li>
+															<li>
+																<span class="square"></span>
+																<i class="bi bi-globe text-primary"></i>
+																<a href="https://pnginx.flement.org/"
+																	target="_blank">nginx</a>
+															</li>
+															<li>
+																<span class="square"></span>
+																<i class="bi bi-globe text-primary"></i>
+																<a href="https://omni-tools.flement.org/"
+																	target="_blank">omni-tools</a>
+															</li>
+															<li>
+																<span class="square"></span>
+																<i class="bi bi-globe text-primary"></i>
+																<a href="https://it-tools.flement.org/"
+																	target="_blank">it-tools</a>
+															</li>
+															<li>
+																<span class="square"></span>
+																<i class="bi bi-globe text-primary"></i>
+																<a href="https://psynology.flement.org/"
+																	target="_blank">synology</a>
+															</li>
+														</ul>
+													</div> <!-- end accordion-body -->
+												</div> <!-- end collapse3B -->
+											</div> <!-- end acoordion-item -->
+										</div> <!-- end accordionLevel3 -->
+									</div>
+								</div>
+							</div>
+							<!-- end item 2B -->
+							<!-- start item 2C -->
+							<div class="accordion-item">
+								<h2 class="accordion-header" id="headingTwoC">
+									<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+										data-bs-target="#collapseTwoC">
+										<span class="chevron text-primary"><i
+												class="bi bi-arrow-down-circle fs-5"></i></span> Varia
+									</button>
+								</h2>
+								<div id="collapseTwoC" class="accordion-collapse collapse">
+									<div class="accordion-body">
+										<ul class="world-list">
+											<li>
+												<span class="square"></span>
+												<i class="bi bi-globe text-primary"></i>
+												<a href="https://www.wunderground.com/dashboard/pws/ILIEVE23"
+													target="_blank">My weatherstation - wunderground</a>
+											</li>
+											<li>
+												<span class="square"></span>
+												<i class="bi bi-globe text-primary"></i>
+												<a href="https://app.weathercloud.net/d3105211632#profile"
+													target="_blank">My weatherstation - weathercloud</a>
+											</li>
+											<li>
+												<span class="square"></span>
+												<i class="bi bi-globe text-primary"></i>
+												<a href="https://www2.telenet.be/residential/nl/landingspaginas/speedtest.html"
+													target="_blank">Telenet speedtest</a>
+											</li>
+											<li>
+												<span class="square"></span>
+												<i class="bi bi-globe text-primary"></i>
+												<a href="https://test-ipv6.com/" target="_blank">Test IP v6 settings</a>
+											</li>
+											<li>
+												<span class="square"></span>
+												<i class="bi bi-globe text-primary"></i>
+												<a href="https://dnschecker.org/all-tools.php" target="_blank">DNS
+													Checker</a>
+											</li>
+											<li>
+												<span class="square"></span>
+												<i class="bi bi-globe text-primary"></i>
+												<a href="https://www.whynopadlock.com/" target="_blank">Test gebruik van
+													https op een website</a>
+											</li>
+											<li>
+												<span class="square"></span>
+												<i class="bi bi-globe text-primary"></i>
+												<a href="http://bookszlibb74ugqojhzhg2a63w5i2atv5bqarulgczawnbmsb6s6qead.onion/"
+													target="_blank">z-libray</a>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+							<!-- end item 3C -->
 						</div>
 					</div>
 				</div>
-				<!-- end item 3C -->
-            </div>
-          </div>
-        </div>
-      </div>
+			</div>
 
-      <!-- Item 3 -->
-      <div class="accordion-item">
-        <h2 class="accordion-header" id="headingThree">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree">
-            <span class="chevron text-primary"><i class="bi bi-arrow-down-circle fs-5"></i></span>Benelux
-          </button>
-        </h2>
-        <div id="collapseThree" class="accordion-collapse collapse">
-          <div class="accordion-body">
-            <ul class="world-list">
-				<li>
-					<span class="square"></span>
-					<i class="bi bi-globe text-primary"></i>
-					<a href="https://www.beneluxparl.eu" target="_blank">Website</a>
-				</li>
-				<li>
-					<span class="square"></span>
-					<i class="bi bi-globe text-primary"></i>
-					<a href="https://nextcloud.beneluxparl.eu" target="_blank">Nextcloud</a>
-				</li>
-				<li>
-					<span class="square"></span>
-					<i class="bi bi-globe text-primary"></i>
-					<a href="https://login.infomaniak.com/login?lang=fr" target="_blank">Infomaniak</a>
-				</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+			<!-- Item 3 -->
+			<div class="accordion-item">
+				<h2 class="accordion-header" id="headingThree">
+					<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+						data-bs-target="#collapseThree">
+						<span class="chevron text-primary"><i class="bi bi-arrow-down-circle fs-5"></i></span>Benelux
+					</button>
+				</h2>
+				<div id="collapseThree" class="accordion-collapse collapse">
+					<div class="accordion-body">
+						<ul class="world-list">
+							<li>
+								<span class="square"></span>
+								<i class="bi bi-globe text-primary"></i>
+								<a href="https://www.beneluxparl.eu" target="_blank">Website</a>
+							</li>
+							<li>
+								<span class="square"></span>
+								<i class="bi bi-globe text-primary"></i>
+								<a href="https://nextcloud.beneluxparl.eu" target="_blank">Nextcloud</a>
+							</li>
+							<li>
+								<span class="square"></span>
+								<i class="bi bi-globe text-primary"></i>
+								<a href="https://login.infomaniak.com/login?lang=fr" target="_blank">Infomaniak</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
-  <!-- Bootstrap 5 JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-  <script>
-    const toggleBtn = document.getElementById('darkModeToggle');
-    const root = document.documentElement;
+	<!-- Bootstrap 5 JS -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+	<script>
+		const toggleBtn = document.getElementById('darkModeToggle');
+		const root = document.documentElement;
 
-    // Automatische detectie van systeeminstelling
-    let savedTheme = localStorage.getItem('theme');
-    if (!savedTheme) {
-      savedTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-    }
-    root.setAttribute('data-bs-theme', savedTheme);
-    setToggleAppearance(savedTheme);
+		// Automatische detectie van systeeminstelling
+		let savedTheme = localStorage.getItem('theme');
+		if (!savedTheme) {
+			savedTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+		}
+		root.setAttribute('data-bs-theme', savedTheme);
+		setToggleAppearance(savedTheme);
 
-    toggleBtn.addEventListener('click', () => {
-      const current = root.getAttribute('data-bs-theme') === 'dark' ? 'light' : 'dark';
-      root.setAttribute('data-bs-theme', current);
-      localStorage.setItem('theme', current);
-      setToggleAppearance(current);
-    });
+		toggleBtn.addEventListener('click', () => {
+			const current = root.getAttribute('data-bs-theme') === 'dark' ? 'light' : 'dark';
+			root.setAttribute('data-bs-theme', current);
+			localStorage.setItem('theme', current);
+			setToggleAppearance(current);
+		});
 
-    function setToggleAppearance(theme) {
-      if (theme === 'dark') {
-        toggleBtn.textContent = '☀️';
-        toggleBtn.classList.remove('btn-outline-dark');
-        toggleBtn.classList.add('btn-outline-light');
-      } else {
-        toggleBtn.textContent = '🌙';
-        toggleBtn.classList.remove('btn-outline-light');
-        toggleBtn.classList.add('btn-outline-dark');
-      }
-    }
-  </script>
+		function setToggleAppearance(theme) {
+			if (theme === 'dark') {
+				toggleBtn.textContent = '☀️';
+				toggleBtn.classList.remove('btn-outline-dark');
+				toggleBtn.classList.add('btn-outline-light');
+			} else {
+				toggleBtn.textContent = '🌙';
+				toggleBtn.classList.remove('btn-outline-light');
+				toggleBtn.classList.add('btn-outline-dark');
+			}
+		}
+	</script>
 </body>
+
 </html>
